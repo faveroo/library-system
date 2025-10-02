@@ -3,6 +3,7 @@
 
     class IndexController extends Controller {
         public function index() {
-            $this->view('home', 'index');
+            $data = ["b", "c", "d"];
+            $this->view('home', 'index', $data);
         }
     }

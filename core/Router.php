@@ -15,7 +15,7 @@ class Router {
 
         if(isset($url[0]) && !empty($url[0])) {
             $controllerName = ucfirst($url[0]) . 'Controller';
-            $controllerFile = '../app/controllers/' . $controllerName . '.php';
+            $controllerFile = '../app/Controllers/' . $controllerName . '.php';
             
 
             if(file_exists($controllerFile)) {
@@ -25,7 +25,7 @@ class Router {
                 $this->redirect('/');
             }
         }
-        require_once '../app/controllers/' . $this->controller . '.php';
+        require_once '../app/Controllers/' . $this->controller . '.php';
         
         // Instancia o controller
         $this->controller = new $this->controller;

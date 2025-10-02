@@ -28,6 +28,7 @@
         <p><?= $title ?></p>
         <p>Projeto: <?= Config::APP_NAME ?></p>
         <p>URL Base: <?= Config::BASE_URL ?></p>
+        <?= print_r($data)?>
     </div>
 </body>
 </html>
