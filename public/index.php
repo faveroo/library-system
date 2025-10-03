@@ -47,6 +47,10 @@ function redirect($path = '') {
     exit;
 }
 
+function isAuthenticated() {
+    return isset($_SESSION['user_id']);
+}
+
 try {
     // Cria instância do Router e processa a requisição
     $app = new Router();

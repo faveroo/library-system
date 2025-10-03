@@ -2,9 +2,9 @@
     class Controller {
     
     // Carrega uma view
-    protected function view($type, $view, $data = []) {
+    protected function view($view, $data = []) {
         extract($data); // Transforma array em variáveis
-        require_once "../app/views/$type/$view.php";
+        require_once "../app/views/$view.php";
     }
     
     // Carrega um model
