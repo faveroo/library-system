@@ -1,6 +1,0 @@
-body {
-    background: linear-gradient(#06092e 50%, #171a36 100%);
-    background-repeat: no-repeat;      /* não repete */
-    background-attachment: fixed;      /* fixa o gradiente */
-    background-size: cover;            /* cobre toda a área */
-}
