@@ -10,7 +10,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 <body class="bg-light">
-    <div class="container d-flex align-items-center justify-content-center min-vh-100">
+    <div class="alert alert-success d-flex align-items-center justify-content-center mt-3 shadow-sm rounded-pill" role="alert" style="max-width: 500px; margin: 0 auto;">
+        <i class="bi bi-check-circle-fill me-2 fs-4"></i>
+        <span><?= htmlspecialchars($_GET['status'] ?? '', ENT_QUOTES, 'UTF-8') ?></span>
+    </div>
+
+    <div class="container d-flex align-items-center justify-content-center" style="min-height: 60vh;">
         <div class="card shadow-lg p-4" style="min-width: 350px; max-width: 400px; width: 100%;">
             <div class="text-center mb-4">
                 <i class="fa fa-user-plus fa-3x text-primary mb-2"></i>

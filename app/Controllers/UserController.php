@@ -6,15 +6,17 @@ class UserController extends Controller {
 
     public function create() {
         if($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            $this->redirect('');
+            $this->redirect('?status=Acesso%20Inválido');
         }
 
-
         $userModel = $this->model('User');
-
         $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
         $status = $userModel->findByEmail($email);
-        if($status['exist'] > 0) $this->redirect("?status=email%20ja%20cadastrado");
+        
+        if($status['exist'] > 0) { 
+            $this->view("auth/register", ["status" => "Email já cadastrado", "old" => $_POST]); 
+            return;
+        }
 
         $data = [
             "name" => htmlspecialchars($_POST['name']),
@@ -26,11 +28,12 @@ class UserController extends Controller {
         if($user) {
             $this->redirect('?status=Usuário%20Criado%20Com%20Sucesso');
         } else {
-            $this->redirect('?status=Erro%20Ao%20Cadastrar%20Usuário');
+            $this->view('auth/register', ["status" => "Erro ao Cadastrar Usuário", "old" => $_POST]);
+            return;
         }
     }
 
     public function login() {
-        
+
     }
 }

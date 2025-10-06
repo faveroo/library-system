@@ -21,27 +21,34 @@
                     <label for="name" class="form-label">Nome</label>
                     <div class="input-group">
                         <span class="input-group-text"><i class="fa fa-user"></i></span>
-                        <input type="text" class="form-control" id="name" name="name" placeholder="Seu nome completo" required>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Seu nome completo" required value="<?php echo $old['name'] ?? "" ?>">
                     </div>
                 </div>
                 <div class="mb-3">
                     <label for="email" class="form-label">E-mail</label>
                     <div class="input-group">
                         <span class="input-group-text"><i class="fa fa-envelope"></i></span>
-                        <input type="email" class="form-control" id="email" name="email" placeholder="seu@email.com" required>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="seu@email.com" required value="<?php echo $old['email'] ?? "" ?>">
                     </div>
                 </div>
                 <div class="mb-3">
                     <label for="password" class="form-label">Senha</label>
                     <div class="input-group">
                         <span class="input-group-text"><i class="fa fa-lock"></i></span>
-                        <input type="password" class="form-control" id="password" name="password" placeholder="Crie uma senha" required minlength="6">
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Crie uma senha" required minlength="8">
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary w-100">
                     <i class="fa fa-user-plus me-2"></i> Registrar
                 </button>
             </form>
+
+            <?php if (isset($status)): ?>
+                <div class="alert alert-danger mb-10">
+                    <i class="fa fa-exclamation-circle"></i> <?php echo $status; ?>
+                </div>
+            <?php endif; ?>
+
             <div class="text-center mt-3">
                 <small>Já tem uma conta? <a href="/home/index">Entrar</a></small>
             </div>
