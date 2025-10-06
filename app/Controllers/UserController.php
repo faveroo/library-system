@@ -29,4 +29,8 @@ class UserController extends Controller {
             $this->redirect('?status=Erro%20Ao%20Cadastrar%20Usuário');
         }
     }
+
+    public function login() {
+        
+    }
 }

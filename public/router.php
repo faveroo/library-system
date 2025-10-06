@@ -1,6 +1,4 @@
 <?php
-// public/router.php
-
 // Serve arquivos estáticos diretamente
 if (php_sapi_name() === 'cli-server') {
     $file = __DIR__ . $_SERVER['REQUEST_URI'];

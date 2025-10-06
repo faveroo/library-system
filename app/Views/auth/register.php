@@ -14,9 +14,16 @@
         <div class="card shadow-lg p-4" style="min-width: 350px; max-width: 400px; width: 100%;">
             <div class="text-center mb-4">
                 <i class="fa fa-user-plus fa-3x text-primary mb-2"></i>
-                <h2 class="h4 mb-0">Login</h2>
+                <h2 class="h4 mb-0">Criar Conta</h2>
             </div>
-            <form method="POST" action="/user/login">
+            <form method="POST" action="/user/create">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Nome</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fa fa-user"></i></span>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Seu nome completo" required>
+                    </div>
+                </div>
                 <div class="mb-3">
                     <label for="email" class="form-label">E-mail</label>
                     <div class="input-group">
@@ -32,11 +39,11 @@
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary w-100">
-                    <i class="fa fa-user-plus me-2"></i> Login
+                    <i class="fa fa-user-plus me-2"></i> Registrar
                 </button>
             </form>
             <div class="text-center mt-3">
-                <small>Não tem uma conta? <a href="/auth/register">Registre-se</a></small>
+                <small>Já tem uma conta? <a href="/home/index">Entrar</a></small>
             </div>
         </div>
     </div>
