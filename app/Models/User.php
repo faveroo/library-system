@@ -2,6 +2,24 @@
 
 class User extends Model{
     protected $db;
+    protected $table = 'users';
+    private $id;
+    private $name;
+    private $email;
+    private $password;
+
+    public function __set($attr, $value) {
+        if(property_exists($this, $attr)) {
+            $this->$attr = $value;
+        }
+    }
+
+    public function __get($attr) {
+        if(property_exists($this, $attr)) {
+            return $this->$attr;
+        }
+        return null;
+    }
 
     public function __construct() {
         $this->db = (new Model())->connect();
@@ -29,7 +47,7 @@ class User extends Model{
     }
 
     public function findByEmail($email) {
-        $stmt = $this->db->prepare("SELECT COUNT(*) as exist FROM users WHERE email = :email");
+        $stmt = $this->db->prepare("SELECT COUNT(*) as exist, id, nome, password, email FROM users WHERE email = :email");
         $stmt->bindParam(':email', $email);
         $stmt->execute();
         return $stmt->fetch(pDO::FETCH_ASSOC);

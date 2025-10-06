@@ -33,7 +33,23 @@ class UserController extends Controller {
         }
     }
 
-    public function login() {
+    public function authenticate() {
+        if(!$this->isPost()) {return;}
+
+        $userModel = $this->model('User');
+        $userModel->__set("email", filter_var($_POST['email'], FILTER_SANITIZE_EMAIL));
+        $user = $userModel->findByEmail($userModel->__get("email"));
+
+        if($user && password_verify($_POST['password'], $user['password'])) {
+            session_start();
+            $_SESSION['user_id'] = $user['id'];
+            $_SESSION['user_name'] = $user['nome'];
+            $_SESSION['user_email'] = $user['email'];
+            $this->redirect('/dashboard/home');
+        } else {
+            $this->view('/index/index', ["status" => "Credenciais Inválidas"]);
+            return;
+        }
 
     }
 }

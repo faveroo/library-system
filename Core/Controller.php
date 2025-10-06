@@ -16,4 +16,8 @@ class Controller {
         header("Location:  " . BASE_URL . $url);
         exit;
     }
+
+    protected function isPost() {
+        return $_SERVER['REQUEST_METHOD'] === 'POST';
+    }
 }

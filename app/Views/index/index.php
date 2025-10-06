@@ -10,10 +10,18 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 <body class="bg-light">
+    <?php if (isset($status)): ?>
+    <div class="alert alert-danger d-flex align-items-center justify-content-center mt-3 shadow-sm rounded-pill" role="alert" style="max-width: 500px; margin: 0 auto;">
+        <i class="bi bi-check-circle-fill me-2 fs-4"></i>
+        <span><?= htmlspecialchars($status ?? '', ENT_QUOTES, 'UTF-8') ?></span>
+    </div>
+    <?php endif; ?>
+    <?php if (isset($_GET['status'])): ?>
     <div class="alert alert-success d-flex align-items-center justify-content-center mt-3 shadow-sm rounded-pill" role="alert" style="max-width: 500px; margin: 0 auto;">
         <i class="bi bi-check-circle-fill me-2 fs-4"></i>
         <span><?= htmlspecialchars($_GET['status'] ?? '', ENT_QUOTES, 'UTF-8') ?></span>
     </div>
+    <?php endif; ?>
 
     <div class="container d-flex align-items-center justify-content-center" style="min-height: 60vh;">
         <div class="card shadow-lg p-4" style="min-width: 350px; max-width: 400px; width: 100%;">
@@ -21,7 +29,7 @@
                 <i class="fa fa-user-plus fa-3x text-primary mb-2"></i>
                 <h2 class="h4 mb-0">Login</h2>
             </div>
-            <form method="POST" action="/user/login">
+            <form method="POST" action="/user/authenticate">
                 <div class="mb-3">
                     <label for="email" class="form-label">E-mail</label>
                     <div class="input-group">
