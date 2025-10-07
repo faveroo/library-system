@@ -1,22 +1,10 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro de Usuário</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- FontAwesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-</head>
-<body class="bg-light">
-    <div class="container d-flex align-items-center justify-content-center min-vh-100">
+ <div class="container d-flex align-items-center justify-content-center min-vh-100">
         <div class="card shadow-lg p-4" style="min-width: 350px; max-width: 400px; width: 100%;">
             <div class="text-center mb-4">
                 <i class="fa fa-user-plus fa-3x text-primary mb-2"></i>
                 <h2 class="h4 mb-0">Criar Conta</h2>
             </div>
-            <form method="POST" action="/user/create">
+            <form method="POST" action="/auth/register">
                 <div class="mb-3">
                     <label for="name" class="form-label">Nome</label>
                     <div class="input-group">
@@ -31,6 +19,11 @@
                         <input type="email" class="form-control" id="email" name="email" placeholder="seu@email.com" required value="<?php echo $old['email'] ?? "" ?>">
                     </div>
                 </div>
+                <?php if (isset($status) && isset($type)) { ?>
+                    <div class="alert alert-<?= htmlspecialchars($type) ?> mb-10">
+                        <i class="fa fa-exclamation-circle"></i> <?= htmlspecialchars($status, ENT_QUOTES, 'UTF-8') ?>
+                    </div>
+                <?php } ?>
                 <div class="mb-3">
                     <label for="password" class="form-label">Senha</label>
                     <div class="input-group">
@@ -43,12 +36,6 @@
                 </button>
             </form>
 
-            <?php if (isset($status)): ?>
-                <div class="alert alert-danger mb-10">
-                    <i class="fa fa-exclamation-circle"></i> <?php echo $status; ?>
-                </div>
-            <?php endif; ?>
-
             <div class="text-center mt-3">
                 <small>Já tem uma conta? <a href="/home/index">Entrar</a></small>
             </div>
@@ -56,5 +43,4 @@
     </div>
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+

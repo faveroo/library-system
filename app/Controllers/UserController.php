@@ -3,56 +3,13 @@
 require_once __DIR__ . '/../../Core/Controller.php';
 
 class UserController extends Controller {
-
-    public function create() {
-        if($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            $this->redirect('?status=Acesso%20Inválido');
+    public function sair() {
+        if(session_status() === PHP_SESSION_ACTIVE && isset($_SESSION['user_id'])) {
+            unset($_SESSION['user_id']);
+            session_destroy();
+            $this->redirect('', ['status' => 'Desconectado com sucesso', 'type' => 'success']);
         }
 
-        $userModel = $this->model('User');
-        $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
-        $status = $userModel->findByEmail($email);
-        
-        if($status['exist'] > 0) { 
-            $this->view("auth/register", ["status" => "Email já cadastrado", "old" => $_POST]); 
-            return;
-        }
-
-        $data = [
-            "name" => htmlspecialchars($_POST['name']),
-            "email" => $email,
-            "password" => password_hash($_POST['password'], PASSWORD_DEFAULT)
-        ];
-        $user = $userModel->create($data);
-
-        if($user) {
-            $this->redirect('?status=Usuário%20Criado%20Com%20Sucesso');
-        } else {
-            $this->view('auth/register', ["status" => "Erro ao Cadastrar Usuário", "old" => $_POST]);
-            return;
-        }
-    }
-
-    public function authenticate() {
-        if(!$this->isPost()) {return;}
-
-        $userModel = $this->model('User');
-        $userModel->__set("email", filter_var($_POST['email'], FILTER_SANITIZE_EMAIL));
-        $user = $userModel->findByEmail($userModel->__get("email"));
-
-        if($user && password_verify($_POST['password'], $user['password'])) {
-            session_start();
-            $_SESSION['user_id'] = $user['id'];
-            $_SESSION['user_name'] = $user['nome'];
-            $_SESSION['user_email'] = $user['email'];
-            // Redireciona para o dashboard (altera a URL no navegador)
-            $this->redirect('dashboard/home');
-            return;
-        } else {
-            // Exibe a view de login com mensagem de erro
-            $this->view('index/index', ["status" => "Credenciais Inválidas"]);
-            return;
-        }
-
+        $this->redirect('', ['status' => 'Nenhuma sessão ativa', 'type' => 'info']);
     }
 }
