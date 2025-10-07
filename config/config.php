@@ -8,7 +8,7 @@ define('DB_PASS', '');
 define('DB_CHARSET', 'utf8mb4');
 
 // URL Base da aplicação
-define('BASE_URL', 'http://localhost:8000/');
+define('BASE_URL', 'http://localhost:8080/');
 
 // Configurações gerais
 define('APP_NAME', 'Sistema de Biblioteca');

@@ -4,11 +4,11 @@ class Controller {
 
     protected function view($view, $data = []) {
         extract($data);
-        require_once "app/Views/$view.php";
+        require_once __DIR__ . "/../app/Views/$view.php";
     }
 
     protected function model($model) {
-        require_once "app/Models/$model.php";
+        require_once __DIR__ . "/../app/Models/$model.php";
         return new $model();
     }
 

@@ -1,6 +1,6 @@
 <?php
 
-require_once 'Core/Controller.php';
+require_once __DIR__ . '/../../Core/Controller.php';
 
 class UserController extends Controller {
 
@@ -45,9 +45,12 @@ class UserController extends Controller {
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['user_name'] = $user['nome'];
             $_SESSION['user_email'] = $user['email'];
-            $this->redirect('/dashboard/home');
+            // Redireciona para o dashboard (altera a URL no navegador)
+            $this->redirect('dashboard/home');
+            return;
         } else {
-            $this->view('/index/index', ["status" => "Credenciais Inválidas"]);
+            // Exibe a view de login com mensagem de erro
+            $this->view('index/index', ["status" => "Credenciais Inválidas"]);
             return;
         }
 
