@@ -7,7 +7,7 @@ if (isset($_SESSION['flash'])) {
     extract($_SESSION['flash']);
     unset($_SESSION['flash']);
     if (isset($status) && isset($type)) {
-        echo '<div class="alert alert-' . htmlspecialchars($type) . ' mt-3" role="alert" style="max-width:500px; margin:0 auto;">';
+        echo '<div class="alert alert-' . htmlspecialchars($type) . ' mt-3" role="alert" style="max-width:500px; margin:0 auto; position: fixed; top: 0; left: 0; right: 0; z-index: 1050;">';
         echo htmlspecialchars($status, ENT_QUOTES, 'UTF-8');
         echo '</div>';
     }
@@ -19,7 +19,7 @@ if (isset($_SESSION['flash'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Titulo</title>
+    <title><?= $title ?? 'Biblioteca' ?></title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- FontAwesome -->

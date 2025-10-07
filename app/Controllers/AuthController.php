@@ -6,7 +6,7 @@ class AuthController extends Controller {
 
     public function register() {
         if($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            $this->view("auth/register");
+            $this->view("auth/register", ["title" => "Registrar Conta"]);
             exit;
         }
 
@@ -14,7 +14,7 @@ class AuthController extends Controller {
         $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
         $status = $userModel->findByEmail($email);
         if($status['exist'] > 0) { 
-            $this->view("auth/register", ["status" => "Email já cadastrado", "type" => "danger", "old" => $_POST]); 
+            $this->view("auth/register", ["status" => "Email já cadastrado", "type" => "danger", "old" => $_POST, "title" => "Registrar Conta", "autofocus" => "email"]); 
             return;
         }
 
@@ -28,13 +28,20 @@ class AuthController extends Controller {
         if($user) {
             $this->redirect('', ['status' => 'Usuário Criado Com Sucesso', 'type' => 'success']);
         } else {
-            $this->view('auth/register', ["status" => "Erro ao Cadastrar Usuário", "type" => "danger", "old" => $_POST]);
+            $this->view('auth/register', ["status" => "Erro ao Cadastrar Usuário", "type" => "danger", "old" => $_POST, "title" => "Registrar Conta"]);
             return;
         }
     }
 
     public function authenticate() {
-        if(!$this->isPost()) {return;}
+        if(!$this->isPost()) {
+            if($this->isAuthenticated()) {
+                $this->redirect('dashboard/home');
+                return;
+            }
+            $this->redirect('home/index', ['title' => 'Entrar na Conta', 'status' => 'Por favor, faça login para continuar', 'type' => 'info']);
+            return;
+        }
 
         $userModel = $this->model('User');
         $userModel->__set("email", filter_var($_POST['email'], FILTER_SANITIZE_EMAIL));
@@ -45,7 +52,7 @@ class AuthController extends Controller {
             $_SESSION['user_name'] = $user['nome'];
             $_SESSION['user_email'] = $user['email'];
             // Redireciona para o dashboard (altera a URL no navegador)
-            $this->redirect('dashboard/home');
+            $this->redirect('dashboard/home', ['status' => 'Login realizado com sucesso', 'type' => 'success']);
             return;
         } else {
             // Exibe a view de login com mensagem de erro

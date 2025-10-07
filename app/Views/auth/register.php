@@ -1,4 +1,4 @@
- <div class="container d-flex align-items-center justify-content-center min-vh-100">
+ <div class="container d-flex align-items-center justify-content-center" style="min-height: 70vh;">
         <div class="card shadow-lg p-4" style="min-width: 350px; max-width: 400px; width: 100%;">
             <div class="text-center mb-4">
                 <i class="fa fa-user-plus fa-3x text-primary mb-2"></i>
@@ -16,11 +16,11 @@
                     <label for="email" class="form-label">E-mail</label>
                     <div class="input-group">
                         <span class="input-group-text"><i class="fa fa-envelope"></i></span>
-                        <input type="email" class="form-control" id="email" name="email" placeholder="seu@email.com" required value="<?php echo $old['email'] ?? "" ?>">
+                        <input type="email" class="form-control" id="email" name="email" placeholder="seu@email.com" required value="<?php echo $old['email'] ?? "" ?> " <?= isset($autofocus) && $autofocus === 'email' ? 'autofocus onfocus="this.select()"' : '' ;?>>
                     </div>
                 </div>
                 <?php if (isset($status) && isset($type)) { ?>
-                    <div class="alert alert-<?= htmlspecialchars($type) ?> mb-10">
+                    <div class="alert alert-<?= htmlspecialchars($type) ?> mb-4">
                         <i class="fa fa-exclamation-circle"></i> <?= htmlspecialchars($status, ENT_QUOTES, 'UTF-8') ?>
                     </div>
                 <?php } ?>
