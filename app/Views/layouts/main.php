@@ -8,7 +8,7 @@ if (isset($_SESSION['flash'])) {
     unset($_SESSION['flash']);
 
     if (isset($status) && isset($type)) {
-        echo '<div id="flash-message" class="alert alert-' . htmlspecialchars($type) . ' mt-3" role="alert" style="max-width:500px; margin:0 auto; position: fixed; top: 0; left: 0; right: 0; z-index: 1050;">';
+        echo '<div id="flash-message" class="alert alert-' . htmlspecialchars($type) . ' mt-3" role="alert" style="max-width:500px; margin:0 auto; position: fixed; top: 0; left: 0; right: 0; z-index: 9999;">';
         echo htmlspecialchars($status, ENT_QUOTES, 'UTF-8');
         echo '</div>';
     }

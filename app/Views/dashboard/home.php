@@ -1,9 +1,3 @@
-<?php if (isset($status) && isset($type)) { ?>
-  <div class="alert alert-<?= htmlspecialchars($type) ?> mt-3" role="alert" style="max-width: 500px; margin: 0 auto;">
-    <i class="fa fa-info-circle me-2"></i>
-    <span><?= htmlspecialchars($status, ENT_QUOTES, 'UTF-8') ?></span>
-  </div>
-<?php } ?>
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
     <a class="navbar-brand" href="/dashboard/home">Navbar</a>

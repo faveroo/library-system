@@ -30,4 +30,19 @@ class DashboardController extends Controller {
         
         $this->view('dashboard/profile', ['user' => $user, 'title' => 'Meu Perfil']);
     }
+
+    public function books() {
+        if(!$this->isAuthenticated()) {
+            $this->redirect('home/index', [
+                'status' => 'Por favor, faça login para acessar os livros',
+                'type' => 'danger'
+            ]);
+            return;
+        }
+        $bookModel = $this->model('Book');
+        $categoryModel = $this->model('Category');
+        $categorias = $categoryModel->getAllCategories();
+        $books = $bookModel->getAllBooks();
+        $this->view('dashboard/books', ['books' => $books, 'categorias' => $categorias, 'title' => 'Books']);
+    }
 }
