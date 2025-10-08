@@ -27,6 +27,7 @@ class DashboardController extends Controller {
         $userModel = $this->model('User');
         $userModel->__set("id", $_SESSION['user_id']);
         $user = $userModel->getUserById($userModel->__get("id"));
-        // ...
+        
+        $this->view('dashboard/profile', ['user' => $user, 'title' => 'Meu Perfil']);
     }
 }

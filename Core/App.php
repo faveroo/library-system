@@ -30,7 +30,15 @@ class App {
         $this->params = $url ? array_values($url) : [];
         
         // Chama o método com os parâmetros
-        call_user_func_array([$this->controller, $this->method], $this->params);
+        try {
+            call_user_func_array([$this->controller, $this->method], $this->params);
+        } catch (Throwable $e) {
+            error_log($e);
+            $_SESSION['ultima_rota'] = $_SERVER['HTTP_REFERER'] ?? '/';
+            header("Location: " . BASE_URL . "auth/error500");
+            exit;
+        }
+
     }
     
     // Divide a URL em partes

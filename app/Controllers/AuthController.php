@@ -60,4 +60,8 @@ class AuthController extends Controller {
             return;
         }
     }
+
+    public function error500() {
+        $this->view('auth/error500');
+    }
 }
