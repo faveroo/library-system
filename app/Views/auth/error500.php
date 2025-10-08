@@ -1,4 +1,7 @@
 <?php
+if(isset($_SESSION['flash'])) {
+    unset($_SESSION['flash']);
+}
 $voltar = $_SESSION['ultima_rota'] ?? '/';
 unset($_SESSION['ultima_rota']);
 ?>
