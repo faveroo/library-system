@@ -30,14 +30,21 @@ class App {
         $this->params = $url ? array_values($url) : [];
         
         // Chama o método com os parâmetros
-        try {
+        // try {
             call_user_func_array([$this->controller, $this->method], $this->params);
-        } catch (Throwable $e) {
-            error_log($e);
-            $_SESSION['ultima_rota'] = $_SERVER['HTTP_REFERER'] ?? '/';
-            header("Location: " . BASE_URL . "auth/error500");
-            exit;
-        }
+        // } catch (Throwable $e) {
+        //     error_log($e);
+        //     if(isset($_SERVER['HTTP_REFERER']) && !empty($_SERVER['HTTP_REFERER'])) {
+        //         $_SESSION['ultima_rota'] = $_SERVER['HTTP_REFERER'];
+        //     } elseif(isset($_SESSION['user_id'])) {
+        //         $_SESSION['ultima_rota'] = '/dashboard/home';
+        //     } else {
+        //         $_SESSION['ultima_rota'] = '/';
+                
+        //     }
+        //     header("Location: " . BASE_URL . "auth/error500");
+        //     exit;
+        // }
 
     }
     

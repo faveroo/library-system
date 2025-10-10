@@ -24,13 +24,25 @@ class BookController extends Controller {
         $titulo = trim($_POST['titulo'] ?? '');
         $autor = trim($_POST['autor'] ?? '');
         $categoria_id = intval($_POST['category_id'] ?? 0);
-        $descricao = intval($_POST['descricao'] ?? 0);
+        $descricao = trim($_POST['descricao'] ?? '');
 
         if(empty($titulo) || empty($autor) || $categoria_id <= 0 || empty($descricao)) {
             $this->redirect('dashboard/books', ['status' => 'Dados inválidos', 'type' => 'danger', 'open' => 1]);
         }
-                
         
+        $data = [
+            'titulo' => $titulo,
+            'autor' => $autor,
+            'categoria_id' => $categoria_id,
+            'descricao' => $descricao
+        ];
 
+        $bookModel = $this->model('Book');
+        $exists = $bookModel->create($data);
+        if($exists) {
+            $this->redirect('dashboard/books', ['status' => 'Livro Cadastrado com Sucesso', 'type' => 'success']);
+        }
+
+        $this->redirect('dashboard/books', ['status' => 'Erro ao Cadastrar Livro', 'type' => 'danger']);
     }
 }

@@ -1,11 +1,3 @@
-
-<?php if (isset($status) && isset($type)): ?>
-    <div class="alert alert-<?= htmlspecialchars($type) ?> d-flex align-items-center justify-content-center mt-3 shadow-sm rounded-pill" role="alert" style="max-width: 500px; margin: 0 auto;">
-        <i class="bi bi-check-circle-fill me-2 fs-4"></i>
-        <span><?= htmlspecialchars($status, ENT_QUOTES, 'UTF-8') ?></span>
-    </div>
-    <?php endif; ?>
-
     <div class="container d-flex align-items-center justify-content-center mt-3" style="min-height: 60vh;">
         <div class="card shadow-lg p-4" style="min-width: 350px; max-width: 400px; width: 100%;">
             <div class="text-center mb-4">

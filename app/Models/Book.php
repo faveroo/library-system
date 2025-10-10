@@ -34,6 +34,13 @@ class Book extends Model {
     }
 
     public function create($data) {
-        $sql = "INSERT INTO $this->table ()";
+        $sql = "INSERT INTO $this->table (titulo, autor, categoria_id, descricao) VALUES (:titulo, :autor, :categoria_id, :descricao)";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(':titulo', $data['titulo']);
+        $stmt->bindParam(':autor', $data['autor']);
+        $stmt->bindParam(':categoria_id', $data['categoria_id']);
+        $stmt->bindParam(':descricao', $data['descricao']);
+        return $stmt->execute();
+
     }
 }

@@ -7,7 +7,9 @@
         Cadastrar Livro
     </button>
 </div>
-
+<?php if(isset($books)): ?>
+          <?php print_r($books); ?>
+        <?php endif; ?>
 <!-- Modal -->
 <div class="modal fade" id="modalLivro" tabindex="-1" aria-labelledby="modalLivroLabel" aria-hidden="true">
   <div class="modal-dialog">
